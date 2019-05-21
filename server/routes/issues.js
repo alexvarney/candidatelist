@@ -31,4 +31,15 @@ router.post('/', (req, res) =>{
 
 })
 
+/* Delete an issue */
+router.delete('/id/:id', (req, res)=>{
+    Issue.findByIdAndDelete(req.params.id).exec((error)=>{
+        if (error) {
+            console.log(error);
+            return res.send(500);
+        }
+        res.send(200);
+    })
+})
+
 module.exports = router;
