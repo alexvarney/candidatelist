@@ -13,7 +13,7 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 app.use(cors())
-
+app.disable('etag');
 mongoose.connect('mongodb://localhost/candidate-dev')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));

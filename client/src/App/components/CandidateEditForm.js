@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom';
+import DeletionConfirm from './DeletionConfirm';
 
 export default class CandidateEditForm extends Component {
 
@@ -37,7 +38,6 @@ export default class CandidateEditForm extends Component {
     }
 
     deleteCandidate = (event) => {
-        event.preventDefault();
         const URL = `${process.env.REACT_APP_API_PATH}/candidates/id/${this.props.candidate._id}`
         
         fetch(URL, {
@@ -91,7 +91,7 @@ export default class CandidateEditForm extends Component {
                 <textarea name="description" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.description}`}></textarea>
             </label>
             <input type="submit"></input>
-            <button onClick={this.deleteCandidate}>Delete Candidate</button>
+            <DeletionConfirm onDelete={this.deleteCandidate}/>
         </form>
 
         )
