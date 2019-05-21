@@ -36,12 +36,17 @@ export default class SingleCandidateView extends Component {
 
     render() {
 
-        const {_id, name, state, dob, slogan, status, polling, positions} = this.state.data;
+        const {_id, name, state, dob, slogan, status, polling, positions, image} = this.state.data;
         const years = moment().diff(dob, 'years');
+        const imgStyle = {
+            maxWidth: '256px',
+            maxHeight: '256px',
+        }
 
         return (
         <div>
             <h1>{name}</h1>
+            {(image)?<img style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
             <p>State: {state}</p>
             <p>Age: {years} Years Old</p>
             <p>Campaign Status: {status}</p>

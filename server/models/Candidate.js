@@ -7,6 +7,7 @@ const CandidateSchema = new mongoose.Schema({
     slogan: String,
     status: String,
     polling: Number,
+    image: String,
     positions: [{
         issue: mongoose.Schema.Types.ObjectId,
         status: String,
