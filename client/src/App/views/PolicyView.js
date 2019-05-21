@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import PolicyAddForm from '../components/PolicyAddForm'
+import PolicyDisplay from '../components/PolicyDisplay'
+
 export default class PolicyView extends Component {
   constructor(props){
     super(props)
@@ -21,16 +24,15 @@ export default class PolicyView extends Component {
 
   } 
 
+
   render() {
     return (
       <div>
         {this.state.policies.map(item=>{
           return(
-          <div>
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-          </div>)
+          <PolicyDisplay onUpdate={this.getPolicies} policy={item}/>)
         })}
+        <PolicyAddForm onUpdate={this.getPolicies}/>
       </div>
     )
   }
