@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+
 
 import CandidateEditForm from '../components/CandidateEditForm';
+import CandidateTitleCard from '../components/CandidateTitleCard';
 import PositionDisplay from '../components/PositionDisplay';
 import PositionAddForm from '../components/PositionAddForm';
+
 
 export default class SingleCandidateView extends Component {
     constructor(props){
         super(props);
         this.state = {
-            data: {},
+            candidate: {},
             policies: [],
         }
     }
@@ -29,41 +31,37 @@ export default class SingleCandidateView extends Component {
 
         fetch(`${process.env.REACT_APP_API_PATH}/candidates/id/${params.id}`)
         .then(v => v.json())
-        .then(v => this.setState({data: v}));
+        .then(v => this.setState({candidate: v}));
     }
 
 
 
     render() {
 
-        const {_id, name, state, dob, slogan, status, polling, positions, image} = this.state.data;
-        const years = moment().diff(dob, 'years');
+        const {_id, name, state, dob, slogan, status, polling, positions, image} = this.state.candidate;
+
         const imgStyle = {
             maxWidth: '256px',
             maxHeight: '256px',
         }
+        const containerStyle = {
+            padding: '1em 0em 0em 0.5em'
+        }
 
         return (
-        <div>
-            <h1>{name}</h1>
-            {(image)?<img style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
-            <p>State: {state}</p>
-            <p>Age: {years} Years Old</p>
-            <p>Campaign Status: {status}</p>
-            {(slogan)?<p>Slogan: {slogan}</p>:null}
-            {(polling !== -1) ? <p>Polling: {polling}%</p>:null}
-
+        <div style={containerStyle}>
+            <CandidateTitleCard candidate={this.state.candidate}/>
             <h2>Positions:</h2>
-            <h3>Add Position</h3>
             
-            {(this.state.data && this.state.data.positions) ? this.state.data.positions.map(position=>{
+            
+            {(this.state.candidate && this.state.candidate.positions) ? this.state.candidate.positions.map(position=>{
                 return(<PositionDisplay onUpdate={this.onUpdate} position={position} policyList={this.state.policies}/>)
             }):null}
-
-<PositionAddForm onUpdate={this.onUpdate} candidate={this.state.data} policyList={this.state.policies}/>
+            <h3>Add Position</h3>
+            <PositionAddForm onUpdate={this.onUpdate} candidate={this.state.candidate} policyList={this.state.policies}/>
             
             <h3>Edit Candidate</h3>
-            <CandidateEditForm onUpdate={this.onUpdate} candidate={this.state.data}/>
+            <CandidateEditForm onUpdate={this.onUpdate} candidate={this.state.candidate}/>
 
 
         </div>

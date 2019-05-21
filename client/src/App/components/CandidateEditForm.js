@@ -86,6 +86,10 @@ export default class CandidateEditForm extends Component {
                 Image name:
                 <input name="image" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.image}`}></input>
             </label>
+            <label style={labelStyle}>
+                Candidate description:<br/>
+                <textarea name="description" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.description}`}></textarea>
+            </label>
             <input type="submit"></input>
             <button onClick={this.deleteCandidate}>Delete Candidate</button>
         </form>
