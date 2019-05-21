@@ -23,7 +23,8 @@ export default (props) => {
 
     const {position, policyList} = props;
   
-    const {name} = policyList.filter(policy=>policy._id === position.issue)[0]
+    const result = policyList.filter(policy=>policy._id === position.issue)[0]
+    const name = (result) ? result.name : '<DELETED>';
 
     const makeDeleteRequest = () => {
         const URL = `${process.env.REACT_APP_API_PATH}/candidates/positions/${position._id}`;
@@ -33,6 +34,8 @@ export default (props) => {
         .then((data)=>props.onUpdate());
 
     }
+
+    
 
     return (
         <div>
