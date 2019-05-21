@@ -1,23 +1,26 @@
-import React from 'react'
+import React, {Component} from 'react'
+import DeletionConfirm from './DeletionConfirm';
 
-export default (props) => {
+export default class PolicyDisplay extends Component {
+  
 
-    const {policy, onUpdate} = props;
+  deletePolicy = (event) => {
+      const URL = `${process.env.REACT_APP_API_PATH}/issues/id/${this.props.policy._id}`;
+      fetch(URL, {
+          method: 'DELETE', 
+      })
+      .then(()=>this.props.onUpdate());
+  }
+    
 
-    const deletePolicy = (event) => {
-            const URL = `${process.env.REACT_APP_API_PATH}/issues/id/${policy._id}`;
-            fetch(URL, {
-                method: 'DELETE', 
-            })
-            .then(()=>onUpdate());
-        
-        onUpdate();
-    }
-
-  return (
-    <div>
-        <h3><span onClick={deletePolicy}>(x)</span> {policy.name}</h3>
-        <p>{policy.description}</p>
-    </div>
-  )
+    render(){
+      const {policy} = this.props;
+      return (
+        <div>
+            <h3>{policy.name}</h3>
+            <p>{policy.description}</p>
+            <DeletionConfirm onDelete={this.deletePolicy}/>
+        </div>
+      )
+      }
 }

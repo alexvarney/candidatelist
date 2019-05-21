@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import DeletionConfirm from './DeletionConfirm';
+
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -45,7 +47,6 @@ export default class PositionDisplay extends Component {
             },
         }
 
-
         const {position, policyList} = this.props;
     
         const result = policyList.filter(policy=>policy._id === position.issue)[0]
@@ -59,7 +60,7 @@ export default class PositionDisplay extends Component {
             flexDirection: 'row',
             flexWrap: 'wrap',
             marginBottom: '1em',
-            padding: '0 1em 0 1em',
+            padding: `0 1em ${(this.state.expanded)?'1em':'0em'} 1em`,
             marginLeft: 'auto',
             marginRight: 'auto',
         }
@@ -81,8 +82,8 @@ export default class PositionDisplay extends Component {
                 <p style={{width: '20%'}}><span style={styleMap[position.status]}>{position.status.capitalize()}</span></p>
                 <p onClick={this.changeExpansion} style={{width: '10%', textAlign: 'right'}}>{(this.state.expanded)?'Less':'More'}</p>
                 <div style={expanderStyle}>
-                    
                     <p>{position.description}</p>
+                    <DeletionConfirm onDelete={this.makeDeleteRequest}/>
                 </div>
             </div>
         )
