@@ -45,13 +45,13 @@ export default class SingleCandidateView extends Component {
             maxHeight: '256px',
         }
         const containerStyle = {
-            padding: '1em 0em 0em 0.5em'
+            padding: '1em 0.5em 0em 0.5em'
         }
 
         return (
         <div style={containerStyle}>
             <CandidateTitleCard candidate={this.state.candidate}/>
-            <h2>Positions:</h2>
+            <h2 style={{textAlign: 'center'}}>Positions:</h2>
             
             
             {(this.state.candidate && this.state.candidate.positions) ? this.state.candidate.positions.map(position=>{
