@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom';
 import DeletionConfirm from './DeletionConfirm';
+import PositionAddForm from './PositionAddForm';
+import PositionEditController from './PositionEditController';
 
 export default class CandidateEditForm extends Component {
 
@@ -48,7 +50,9 @@ export default class CandidateEditForm extends Component {
     render() {
 
         const componentStyle = {
-
+            maxWidth: '500px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
         }
 
         const labelStyle = {
@@ -56,43 +60,51 @@ export default class CandidateEditForm extends Component {
         }
 
         return (
-        <form onSubmit={this.handleSubmit} style={componentStyle}>
-            {this.renderRedirect()}
-            <label style={labelStyle}>
-                Name:
-                <input name="name" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.name}`}></input>
-            </label>
-            <label style={labelStyle}>
-                State:                
-                <input name="state" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.state}`}></input>
-            </label>
-            <label style={labelStyle}>
-                Date of Birth:
-                <input name="dob" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.dob}`}></input>    
-            </label>
-            <label style={labelStyle}>
-                Status:
-                <input name="status" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.status}`}></input>
-            </label>
-            <label style={labelStyle}>
-                Slogan:
-                <input name="slogan" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.slogan}`}></input>
-            </label>
-            <label style={labelStyle}>
-                Polling:
-                <input name="polling" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.polling}`}></input>
-            </label>
-            <label style={labelStyle}>
-                Image name:
-                <input name="image" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.image}`}></input>
-            </label>
-            <label style={labelStyle}>
-                Candidate description:<br/>
-                <textarea name="description" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.description}`}></textarea>
-            </label>
-            <input type="submit"></input>
-            <DeletionConfirm onDelete={this.deleteCandidate}/>
-        </form>
+        <div style={componentStyle}>
+            <h3>Edit Candidate Data</h3>
+            <form onSubmit={this.handleSubmit}>
+                {this.renderRedirect()}
+                <label style={labelStyle}>
+                    Name:
+                    <input name="name" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.name}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    State:                
+                    <input name="state" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.state}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    Date of Birth:
+                    <input name="dob" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.dob}`}></input>    
+                </label>
+                <label style={labelStyle}>
+                    Status:
+                    <input name="status" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.status}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    Slogan:
+                    <input name="slogan" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.slogan}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    Polling:
+                    <input name="polling" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.polling}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    Image name:
+                    <input name="image" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.image}`}></input>
+                </label>
+                <label style={labelStyle}>
+                    Candidate description:<br/>
+                    <textarea name="description" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.description}`}></textarea>
+                </label>
+                <input type="submit"></input>
+                <DeletionConfirm onDelete={this.deleteCandidate}/>
+            </form>
+            <h3>Add Candidate Positions</h3>
+            <PositionAddForm onUpdate={this.props.onUpdate} candidate={this.props.candidate} policyList={this.props.policies}/>
+
+            <h3>Edit Candidate Positions</h3>
+            <PositionEditController onUpdate={this.props.onUpdate} candidate={this.props.candidate} policyList={this.props.policies}/>
+        </div>
 
         )
     }

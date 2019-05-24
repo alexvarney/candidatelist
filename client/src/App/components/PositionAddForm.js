@@ -41,14 +41,19 @@ export default class PositionAddForm extends Component {
             this.props.onUpdate();
         });
     }
+
+    
   
     render() {
+        
+        const candidatePositionIds = (this.props.candidate.positions) ? Array.from(this.props.candidate.positions.map((position)=>position.issue)) : [];
+        
         return (
         <div>
             <form onSubmit={this.onSubmit}>
                 <select value={this.state.form.issue} onChange={this.onIssueChange} name="issue">
                     <option value="">Select an Issue</option>
-                    {this.props.policyList.map(policy => {
+                    {this.props.policyList.filter((policy) => !candidatePositionIds.includes(policy._id)).map(policy => {
                         return(<option value={policy._id}>{policy.name}</option>)
                     })}
                 </select>

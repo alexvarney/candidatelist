@@ -18,7 +18,7 @@ const Routes = () => {
                 </Route>
                 <Route exact path='/candidates' component={CandidateList} />
                 <Route exact path='/candidates/add' component={CandidateAddForm} />
-                <Route exact path='/candidates/:id' component={SingleCandidateView} />
+                <Route path='/candidates/:id' component={SingleCandidateView} />
                 <Route path="/policies" component={Policies} />
             </Switch>
         </div>

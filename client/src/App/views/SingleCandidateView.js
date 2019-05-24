@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import {Route} from 'react-router-dom';
 
 
 import CandidateEditForm from '../components/CandidateEditForm';
 import CandidateTitleCard from '../components/CandidateTitleCard';
 import PositionDisplay from '../components/PositionDisplay';
-import PositionAddForm from '../components/PositionAddForm';
 
 
 export default class SingleCandidateView extends Component {
@@ -17,7 +17,6 @@ export default class SingleCandidateView extends Component {
     }
 
     componentDidMount(){
-        
         fetch(`${process.env.REACT_APP_API_PATH}/issues/`)
             .then(v=>v.json())
             .then(v=>this.setState({policies: v}));
@@ -57,13 +56,8 @@ export default class SingleCandidateView extends Component {
             {(this.state.candidate && this.state.candidate.positions) ? this.state.candidate.positions.map(position=>{
                 return(<PositionDisplay onUpdate={this.onUpdate} position={position} policyList={this.state.policies}/>)
             }):null}
-            <h3>Add Position</h3>
-            <PositionAddForm onUpdate={this.onUpdate} candidate={this.state.candidate} policyList={this.state.policies}/>
-            
-            <h3>Edit Candidate</h3>
-            <CandidateEditForm onUpdate={this.onUpdate} candidate={this.state.candidate}/>
 
-
+            <Route exact path='/candidates/:id/edit' render={(props)=> <CandidateEditForm candidate={this.state.candidate} policies={this.state.policies} onUpdate={this.onUpdate} {...props}/>} />
         </div>
         )
     }

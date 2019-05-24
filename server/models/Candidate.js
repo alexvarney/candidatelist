@@ -13,6 +13,10 @@ const CandidateSchema = new mongoose.Schema({
         issue: mongoose.Schema.Types.ObjectId,
         status: String,
         description: String,
+        links: [{
+            title: String,
+            url: String,
+        }]
     }],
 });
 

@@ -63,6 +63,29 @@ router.delete('/positions/:positionId', (req, res)=>{
     )
 })
 
+/* Add a link to a policy position */ 
+router.post('/id/:id/positions/:positionId/links', (req, res) =>{
+    Candidate.findById(req.params.id).exec((error, doc)=>{
+        if (error) return "An error occured";
+
+        Candidate.update(
+            {_id: req.params.id, 'positions._id': req.params.positionId},
+            {$push: {'positions.$.links': req.body}},
+            (error, success) => {
+                if (error) {
+                    console.log(error);
+                    res.send(500);
+                }
+                else{
+                    res.send(200);
+                }
+            }
+        )
+    })
+})
+
+
+
 /* POST new candidate to the db */
 router.post('/', (req, res) =>{
     const newItem = new Candidate(req.body);

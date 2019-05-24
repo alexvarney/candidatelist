@@ -22,7 +22,7 @@ export default class DeletionConfirm extends Component {
 
     render() {
         return (
-        <div>
+        <div style={this.props.style}>
             {(this.state.deletionConfirm)?<button style={{marginRight: '1em'}}onClick={this.cancelDelete}>Abort</button>:null}
             <button onClick={this.delete}>{(this.state.deletionConfirm)?'Confirm':'Delete'}</button>
         </div>

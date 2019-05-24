@@ -83,7 +83,17 @@ export default class PositionDisplay extends Component {
                 <p onClick={this.changeExpansion} style={{width: '10%', textAlign: 'right'}}>{(this.state.expanded)?'Less':'More'}</p>
                 <div style={expanderStyle}>
                     <p>{position.description}</p>
-                    <DeletionConfirm onDelete={this.makeDeleteRequest}/>
+
+                    <p style={titleStyle}>Sources:</p>
+
+                    <ul>
+                    {(position.links)?position.links.map((link)=>{
+                        return(
+                            <li><a href={link.url}>{link.title}</a><br /></li>
+                        )}):null}
+                    </ul>
+                    
+                    <DeletionConfirm style={{marginTop: '10px'}} onDelete={this.makeDeleteRequest}/>
                 </div>
             </div>
         )
