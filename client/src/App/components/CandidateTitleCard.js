@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment';
 
 export default (props) => {
-    const {name, state, dob, slogan, status, polling, description, image} = props.candidate;
+    const {name, state, dob, slogan, status, polling, description, image, website} = props.candidate;
     
     const years = moment().diff(dob, 'years');
     
@@ -66,6 +66,7 @@ export default (props) => {
                 <p style={styles.statChild}><strong>Campaign Status:</strong> {status}</p>
                 <p style={styles.statChild}><strong>Polling:</strong> {polling}%</p>
                 <p style={styles.statChild}><strong>Age:</strong> {years} Years Old</p>
+                <p style={styles.statChild}><strong>Website:</strong> <a href={website}>{website}</a></p>
             </div>
         </div>
         <div>
