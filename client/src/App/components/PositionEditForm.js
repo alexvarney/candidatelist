@@ -67,6 +67,7 @@ export default class PositionEditForm extends Component {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(this.state.linkForm),})
         .then((data)=>{
+            this.setState({linkForm: {title: '', url: ''}});
             this.props.onUpdate();
         });
     }
@@ -106,9 +107,9 @@ export default class PositionEditForm extends Component {
                     <h3>Add Link to Position</h3>
                     <form>
                         <label>Title</label><br/>
-                        <input type="text" name="title" placeholder="title" onChange={this.onLinkInput} /><br />
+                        <input type="text" name="title" placeholder="title" value={this.state.linkForm.title} onChange={this.onLinkInput} /><br />
                         <label>URL</label><br/>
-                        <input type="text" name="url" placeholder="http://www.example.com" onChange={this.onLinkInput}/><br />
+                        <input type="text" name="url" placeholder="http://www.example.com" value={this.state.linkForm.url}onChange={this.onLinkInput}/><br />
                         <button onClick={this.postLink}>Add</button>
                     </form>
                 </div>

@@ -31,17 +31,20 @@ export default class CandidateList extends Component {
         const linkStyle ={
             color: '#fff',
             textDecoration: 'none',
-
+            width: '32%',
+            minWidth: '275px',
+            maxWidth: '320px',
             float: 'right',
-            width: '49%'
+            display: 'inline-block',
         }
 
         const containerStyle = {
             display: 'flex',
             flexWrap: 'wrap',
-            width: '80%',
+            maxWidth: '80%',
             marginLeft: 'auto',
             marginRight: 'auto',
+            justifyContent: 'center',
         }
 
         const surnameStyle = {
