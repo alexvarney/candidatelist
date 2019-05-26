@@ -7,7 +7,6 @@ export default () => {
         padding: '10px',
         width: '100%',
         backgroundColor: '#000',
-        
     }
 
     const linkStyle = {
@@ -27,8 +26,7 @@ export default () => {
         <span style={titleStyle}>CandidateList</span>
         <Link style={linkStyle} to="/">Home</Link>
         <Link style={linkStyle} to="/candidates">Candidates</Link>
-        <Link style={linkStyle} to="/candidates/add">-> New</Link>
-        <Link style={linkStyle} to="/policies">| Policies</Link>
+        <Link style={linkStyle} to="/policies">Policies</Link>
     </nav>
   )
 }

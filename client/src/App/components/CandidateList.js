@@ -25,29 +25,68 @@ export default class CandidateList extends Component {
             backgroundColor: '#545454',
             color: '#fff',
             padding: '10px 10px 10px 30px',
-            margin: '5px',
-            maxWidth: '60%',
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            margin: '3px',
             borderRadius: '5px',
         }
         const linkStyle ={
             color: '#fff',
             textDecoration: 'none',
-            fontWeight: 'bold',
-            marginLeft: '0.5em',
-            display: 'inline-block',
-            textAlign: 'right',
+
             float: 'right',
+            width: '49%'
+        }
+
+        const containerStyle = {
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '80%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        }
+
+        const surnameStyle = {
+            fontWeight: 'bold',
+            fontSize: '20px'
+        }
+
+        const imgStyle = {
+            maxHeight: '64px',
+            width: 'auto',
+            position: 'relative',
+            left: '0px',
+            textAlign: 'right',
+            borderRadius: '50%',
+            border: '2px solid #0f0f0f',
+        }
+
+        const candidateNameStyle = {
+            float: 'right',
+            textAlign: 'right',
+            paddingRight: '1em',
         }
 
         return (
-        <div>
+        <div style={containerStyle}>
+
+            <h1 style={{display: 'block', width: '100%'}}>Candidates</h1><br />
+
             {this.state.candidates.sort((a,b)=>(a.name.split(" ")[1]>b.name.split(" ")[1])?1:-1).map(person=>{
-                return(<div style={listRow}>
-                    <span>{person.name}</span>
-                    <Link style={linkStyle} to={`/candidates/${person._id}`}>View</Link>
-                </div>)
+
+                const last_name = person.name.substring(person.name.indexOf(' ')+1)
+                const first_name = person.name.split(' ')[0]
+                const {image} = person;
+
+                return(
+                <Link style={linkStyle} to={`/candidates/${person._id}`}>
+                    <div style={listRow}>
+                        {(image)?<img style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
+                        <p style={candidateNameStyle}>
+                            <span>{first_name}</span><br />
+                            <span style={surnameStyle}>{last_name}</span>
+                        </p>
+                    </div>
+                </Link>
+                )
             })}
         </div>
         )

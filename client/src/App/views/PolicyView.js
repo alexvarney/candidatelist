@@ -22,12 +22,20 @@ export default class PolicyView extends Component {
       .then((data)=>data.json())
       .then((data)=>this.setState({policies: data}));
 
-  } 
+  }
 
 
   render() {
+
+    const containerStyle = {
+      maxWidth: '80%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
+
     return (
-      <div>
+      <div style={containerStyle}>
+        <h1>Policies</h1>
         {this.state.policies.map(item=>{
           return(
           <PolicyDisplay onUpdate={this.getPolicies} policy={item}/>)
