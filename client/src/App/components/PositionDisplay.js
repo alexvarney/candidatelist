@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
-import DeletionConfirm from './DeletionConfirm';
 
-
-String.prototype.capitalize = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
 
 export default class PositionDisplay extends Component {
     
@@ -28,6 +23,10 @@ export default class PositionDisplay extends Component {
         this.setState((prevState)=>{
             return({expanded: !prevState.expanded});
         })
+    }
+
+    capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     render() {
@@ -79,7 +78,7 @@ export default class PositionDisplay extends Component {
                 <p style={{width: '70%'}}>
                     <span style={titleStyle}>{name}</span>
                 </p>
-                <p style={{width: '20%'}}><span style={styleMap[position.status]}>{position.status.capitalize()}</span></p>
+                <p style={{width: '20%'}}><span style={styleMap[position.status]}>{this.capitalize(position.status)}</span></p>
                 <p onClick={this.changeExpansion} style={{width: '10%', textAlign: 'right'}}>{(this.state.expanded)?'Less':'More'}</p>
                 <div style={expanderStyle}>
                     <p>{position.description}</p>

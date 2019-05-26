@@ -79,7 +79,7 @@ export default class CandidateList extends Component {
                 return(
                 <Link style={linkStyle} to={`/candidates/${person._id}`}>
                     <div style={listRow}>
-                        {(image)?<img style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
+                        {(image)?<img alt={person.name} style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
                         <p style={candidateNameStyle}>
                             <span>{first_name}</span><br />
                             <span style={surnameStyle}>{last_name}</span>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import DeletionConfirm from './DeletionConfirm';
 
 export default class PolicyDisplay extends Component {
   

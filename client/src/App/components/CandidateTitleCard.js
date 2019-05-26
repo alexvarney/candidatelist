@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment';
 
 export default (props) => {
-    const {_id, name, state, dob, slogan, status, polling, description, image} = props.candidate;
+    const {name, state, dob, slogan, status, polling, description, image} = props.candidate;
     
     const years = moment().diff(dob, 'years');
     
@@ -56,7 +56,7 @@ export default (props) => {
     return (
     <div style={styles.containerStyle}>
         <div style={styles.colSm}>
-        {(image)?<img style={styles.imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
+        {(image)?<img alt={name} style={styles.imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
         </div>
         <div style={styles.colLg}>
             <h1 style={styles.h1}>{name}</h1>
