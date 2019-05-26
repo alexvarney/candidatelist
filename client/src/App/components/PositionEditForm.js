@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import DeletionConfirm from './DeletionConfirm'
+
 
 export default class PositionEditForm extends Component {
 
@@ -13,6 +15,32 @@ export default class PositionEditForm extends Component {
                 url: '',
             },
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({status: nextProps.position.status, description: nextProps.position.description});
+    }
+
+    makeDeleteRequest = (linkId) => {
+
+        return () => {
+            const URL = `${process.env.REACT_APP_API_PATH}/candidates/id/${this.props.candidate._id}/positions/${this.props.position._id}/links/${linkId}`;
+            fetch(URL, {
+                method: 'DELETE', 
+            })
+            .then((data)=>this.props.onUpdate());
+    }
+
+    }
+
+    makeUpdateRequest = (event) => {
+        event.preventDefault();
+        const URL = `${process.env.REACT_APP_API_PATH}/candidates/positions/${this.props.position._id}`;
+        fetch(URL, {
+            method: 'PUT',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({description: this.state.description, status: this.state.status}),
+        }).then((data)=>this.props.onUpdate());
     }
 
     onChange = (event) => {
@@ -45,39 +73,61 @@ export default class PositionEditForm extends Component {
     
 
   render() {
+
+    const flexGrid = {
+        display: 'flex',
+        width: '100%'
+    }
+
+    const flexChild = {
+        width: '45%',
+    }
+
     return (
         <div>
-            {(false)?<form>
-                <label>
-                    Status:
-                </label><br/>
-                
-                <select onChange={this.onChange} value={this.state.status} name="status">
-                    <option value="supports">Supports</option>
-                    <option value="mixed">Mixed</option>
-                    <option value="opposed">Opposed</option>
-                    <option value="unknown">Unknown</option>
-                </select><br/>
-                <textarea onChange={this.onChange} value={this.state.description} name="description" rows="3" /><br/>
-                <button>Update</button>
-            </form>:null}
+            <div style={flexGrid}>
+                <div style={flexChild}>
+                    <h3>Edit Description</h3>
+                    <form onSubmit={this.makeUpdateRequest}>
+                        <label>
+                            Status:
+                        </label><br/>
+                        <select onChange={this.onChange} value={this.state.status} name="status">
+                            <option value="supports">Supports</option>
+                            <option value="mixed">Mixed</option>
+                            <option value="opposed">Opposed</option>
+                            <option value="unknown">Unknown</option>
+                        </select><br/>
+                        <textarea onChange={this.onChange} value={this.state.description} name="description" rows="3" /><br/>
+                        <button>Update</button>
+                    </form>
+                </div>
+                <div style={flexChild}>
+                    <h3>Add Link to Position</h3>
+                    <form>
+                        <label>Title</label><br/>
+                        <input type="text" name="title" placeholder="title" onChange={this.onLinkInput} /><br />
+                        <label>URL</label><br/>
+                        <input type="text" name="url" placeholder="http://www.example.com" onChange={this.onLinkInput}/><br />
+                        <button onClick={this.postLink}>Add</button>
+                    </form>
+                </div>
+            </div>
+            <h3>Delete Position</h3>
+            <DeletionConfirm style={{marginTop: '10px'}} onDelete={this.makeDeleteRequest}/>
 
-            <form>
-                <label>Title</label><br/>
-                <input type="text" name="title" placeholder="title" onChange={this.onLinkInput} /><br />
-                <label>URL</label><br/>
-                <input type="text" name="url" placeholder="http://www.example.com" onChange={this.onLinkInput}/><br />
-                <button onClick={this.postLink}>Add</button>
-            </form>
+
             
+            <h3>Link Manager</h3>
             <table>
                 <thead>
                     {(this.props.position.links && this.props.position.links.length > 0) ? <tr><th>Title</th><th>URL</th><th>Action</th></tr> : null}
                 </thead>
                 <tbody>
                     {this.props.position.links.map((link)=>{
+                        const deletionFunc = this.makeDeleteRequest(link._id);
                         return(
-                            <tr><td><a href={link.url}>{link.title}</a></td><td>{link.url}</td><td>Delete</td></tr>
+                            <tr key={link.url}><td><a href={link.url}>{link.title}</a></td><td>{link.url}</td><td><DeletionConfirm onDelete={deletionFunc}/></td></tr>
                         )
                     })}
                 </tbody>

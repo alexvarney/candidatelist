@@ -10,7 +10,7 @@ export default class DeletionConfirm extends Component {
     
     delete = () => {
         if(this.state.deletionConfirm){
-            this.props.onDelete();
+            this.props.onDelete(this.props.linkId);
         }
 
         this.setState({deletionConfirm: true});

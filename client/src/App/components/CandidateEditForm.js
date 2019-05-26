@@ -99,9 +99,10 @@ export default class CandidateEditForm extends Component {
                 <input type="submit"></input>
                 <DeletionConfirm onDelete={this.deleteCandidate}/>
             </form>
+            <hr />
             <h3>Add Candidate Positions</h3>
             <PositionAddForm onUpdate={this.props.onUpdate} candidate={this.props.candidate} policyList={this.props.policies}/>
-
+            <hr />
             <h3>Edit Candidate Positions</h3>
             <PositionEditController onUpdate={this.props.onUpdate} candidate={this.props.candidate} policyList={this.props.policies}/>
         </div>

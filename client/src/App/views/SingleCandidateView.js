@@ -37,12 +37,6 @@ export default class SingleCandidateView extends Component {
 
     render() {
 
-        const {_id, name, state, dob, slogan, status, polling, positions, image} = this.state.candidate;
-
-        const imgStyle = {
-            maxWidth: '256px',
-            maxHeight: '256px',
-        }
         const containerStyle = {
             padding: '1em 0.5em 0em 0.5em'
         }

@@ -92,8 +92,6 @@ export default class PositionDisplay extends Component {
                             <li><a href={link.url}>{link.title}</a><br /></li>
                         )}):null}
                     </ul>
-                    
-                    <DeletionConfirm style={{marginTop: '10px'}} onDelete={this.makeDeleteRequest}/>
                 </div>
             </div>
         )

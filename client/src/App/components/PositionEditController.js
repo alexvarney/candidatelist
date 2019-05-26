@@ -13,21 +13,33 @@ export default class PositionEditController extends Component {
         this.state = initialState;
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.candidate && nextProps.candidate.positions){
+            const position = nextProps.candidate.positions.filter(position => position.issue === this.state.selectedIssue)[0];
+
+            this.setState({position});
+        }
+    }
+
     onIssueChange = (event) => {
         event.persist();
 
             const position = this.props.candidate.positions.filter(position => position.issue === event.target.value)[0];
 
-            this.setState({selectedIssue: event.target.value, position});
+            this.setState({selectedIssue: event.target.value, position: position});
 
     }
 
     render() {
+
+        const containerStyle = {
+
+        }
         
         const candidatePositionIds = (this.props.candidate.positions) ? Array.from(this.props.candidate.positions.map((position)=>position.issue)) : [];
         
         return (
-        <div>
+        <div style={containerStyle}>
             <form onSubmit={this.onSubmit}>
                 <select value={this.state.selectedIssue} onChange={this.onIssueChange} name="issue">
                     <option value="">Select an Issue</option>
