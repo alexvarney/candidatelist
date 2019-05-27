@@ -71,8 +71,8 @@ export default (props) => {
             </div>
         </div>
         <div>
-            <h3>About {name}</h3>
-            {(description)?<p>{description}</p>:null}
+            
+            {(description)?<div><h3>About {name}</h3><p>{description}</p></div>:null}
         </div>
     </div>
   )

@@ -4,8 +4,8 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Home from './views/Home';
 import Policies from './views/PolicyView';
 
-import CandidateList from './components/CandidateList';
-import CandidateAddForm from './components/CandidateAddForm';
+import CandidateList from './views/CandidateList';
+import CandidateAddForm from './views/CandidateAddForm';
 import SingleCandidateView from './views/SingleCandidateView';
 
 const Routes = () => {
