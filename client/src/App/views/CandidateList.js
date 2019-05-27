@@ -8,7 +8,7 @@ export default class CandidateList extends Component {
         this.state = {
             candidates: [],
             searchTerm: '',
-            sortMethod: 'polling',
+            sortMethod: 'alphabetical',
             showDeclaredOnly: false,
         }
     }
