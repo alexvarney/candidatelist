@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Route} from 'react-router-dom'
 
 import PolicyAddForm from '../components/PolicyAddForm'
 import PolicyDisplay from '../components/PolicyDisplay'
@@ -35,12 +36,12 @@ export default class PolicyView extends Component {
 
     return (
       <div style={containerStyle}>
+        <Route exact path='/policies/add' render={(props)=> <PolicyAddForm onUpdate={this.getPolicies} {...props}/>} />
         <h1>Policies</h1>
         {this.state.policies.map(item=>{
           return(
           <PolicyDisplay onUpdate={this.getPolicies} policy={item}/>)
         })}
-        <PolicyAddForm onUpdate={this.getPolicies}/>
       </div>
     )
   }
