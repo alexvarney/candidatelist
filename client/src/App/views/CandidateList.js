@@ -77,6 +77,7 @@ export default class CandidateList extends Component {
         const declaredFilter = (list) => list.filter((item)=>item.status.toLowerCase() === 'declared');
 
         candidateList = searchFilter(candidateList);
+        candidateList = sorts['alphabetical'](candidateList);
         candidateList = sorts[this.state.sortMethod](candidateList);
         candidateList = (this.state.showDeclaredOnly) ? declaredFilter(candidateList) : candidateList;
 
