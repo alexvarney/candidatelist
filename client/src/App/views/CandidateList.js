@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
+import CandidateListCard from '../components/CandidateListCard';
+
 export default class CandidateList extends Component {
     constructor(){
         super();
@@ -14,7 +16,6 @@ export default class CandidateList extends Component {
     }
 
     componentDidMount(){
-        console.log(`${process.env.REACT_APP_API_PATH}/candidates/`);
         fetch(`${process.env.REACT_APP_API_PATH}/candidates/`)
             .then(response => response.json())
             .then(data=>{
@@ -36,30 +37,34 @@ export default class CandidateList extends Component {
 
     render() {
 
+        const flexContainer = {
+            display: 'flex',
+            flexWrap: 'wrap',
+            maxWidth: '85%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            justifyContent: 'center',
+        }
+
         const listRow = {
             backgroundColor: '#545454',
             color: '#fff',
-            padding: '10px 10px 10px 30px',
+            padding: '10px 10px 10px 10px',
             margin: '3px',
             borderRadius: '3px',
+            minHeight: '70px',
+            overflow: 'hidden',
         }
+
         const linkStyle ={
             color: '#fff',
             textDecoration: 'none',
             width: '32%',
             minWidth: '275px',
-            maxWidth: '320px',
+            maxWidth: '350px',
             float: 'right',
             display: 'inline-block',
-        }
-
-        const flexContainer = {
-            display: 'flex',
-            flexWrap: 'wrap',
-            maxWidth: '80%',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            justifyContent: 'center',
+            overflow: 'hidden',
         }
 
         const surnameStyle = {
@@ -69,18 +74,22 @@ export default class CandidateList extends Component {
 
         const imgStyle = {
             maxHeight: '64px',
-            width: 'auto',
-            position: 'relative',
-            left: '0px',
-            textAlign: 'right',
-            borderRadius: '50%',
             border: '2px solid #0f0f0f',
+            borderRadius: '50%',
+            float: 'left',
+            marginRight: '10px',
         }
 
-        const candidateNameStyle = {
-            float: 'right',
-            textAlign: 'right',
-            paddingRight: '1em',
+        const cardTextContainerStyle = {            
+            width: '100%',
+            padding: '0px 0px 0px 00px',
+            display: 'block',
+        }
+
+        const innerTextContainerStyle = {            
+            backgroundColor: 'darkRed',
+            width: '100%',
+            padding: '0px 0px 0px 00px'
         }
 
         const headerStyle = {
@@ -137,20 +146,7 @@ export default class CandidateList extends Component {
             </div>
             <div style={flexContainer}>
                 {candidateList.map(person=>{
-                    const last_name = person.name.substring(person.name.indexOf(' ')+1)
-                    const first_name = person.name.split(' ')[0]
-                    const {image} = person;
-                    return(
-                    <Link key={person._id} style={linkStyle} to={`/candidates/${person._id}`}>
-                        <div style={listRow}>
-                            {(image)?<img alt={person.name} style={imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
-                            <p style={candidateNameStyle}>
-                                <span>{first_name}</span><br />
-                                <span style={surnameStyle}>{last_name}</span>
-                            </p>
-                        </div>
-                    </Link>
-                    )
+                    return(<CandidateListCard candidate={person} />)
                 })}
             </div>
         </div>
