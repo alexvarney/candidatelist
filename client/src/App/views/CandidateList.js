@@ -86,8 +86,7 @@ export default class CandidateList extends Component {
             <div style={headerStyle}>
                 
                 <h1 style={{display: 'block', width: '100%',}}>Candidates</h1>
-
-
+                
                 <div style={floatingBoxStyle}>
                     <p style={{marginTop: '5px', marginBottom: '5px', fontWeight: 'bold'}}>Search</p>
                     <input style={searchInputStyle} placeholder="Search Candidates..."value={this.state.searchTerm} onChange={this.onSearchChange} type="text"></input>
