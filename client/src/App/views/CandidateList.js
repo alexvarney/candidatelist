@@ -45,52 +45,6 @@ export default class CandidateList extends Component {
             justifyContent: 'center',
         }
 
-        const listRow = {
-            backgroundColor: '#545454',
-            color: '#fff',
-            padding: '10px 10px 10px 10px',
-            margin: '3px',
-            borderRadius: '3px',
-            minHeight: '70px',
-            overflow: 'hidden',
-        }
-
-        const linkStyle ={
-            color: '#fff',
-            textDecoration: 'none',
-            width: '32%',
-            minWidth: '275px',
-            maxWidth: '350px',
-            float: 'right',
-            display: 'inline-block',
-            overflow: 'hidden',
-        }
-
-        const surnameStyle = {
-            fontWeight: 'bold',
-            fontSize: '20px'
-        }
-
-        const imgStyle = {
-            maxHeight: '64px',
-            border: '2px solid #0f0f0f',
-            borderRadius: '50%',
-            float: 'left',
-            marginRight: '10px',
-        }
-
-        const cardTextContainerStyle = {            
-            width: '100%',
-            padding: '0px 0px 0px 00px',
-            display: 'block',
-        }
-
-        const innerTextContainerStyle = {            
-            backgroundColor: 'darkRed',
-            width: '100%',
-            padding: '0px 0px 0px 00px'
-        }
-
         const headerStyle = {
             maxWidth: '75%',
             marginLeft: 'auto',
@@ -129,7 +83,10 @@ export default class CandidateList extends Component {
         return (
         <div>
             <div style={headerStyle}>
+                
                 <h1 style={{display: 'block', width: '100%',}}>Candidates</h1>
+
+
                 <div style={floatingBoxStyle}>
                     <p style={{marginTop: '5px', marginBottom: '5px', fontWeight: 'bold'}}>Search</p>
                     <input style={searchInputStyle} placeholder="Search Candidates..."value={this.state.searchTerm} onChange={this.onSearchChange} type="text"></input>
