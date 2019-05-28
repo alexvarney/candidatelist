@@ -116,8 +116,6 @@ export default class PositionEditForm extends Component {
             </div>
             <h3>Delete Position</h3>
             <DeletionConfirm style={{marginTop: '10px'}} onDelete={this.makeDeleteRequest}/>
-
-
             
             <h3>Link Manager</h3>
             <table>
