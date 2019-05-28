@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
 export default function CandidateListCard(props) {
     const styles = {
@@ -42,25 +43,27 @@ export default function CandidateListCard(props) {
         },
     }
 
-    const {image, name, polling, slogan} = props.candidate;
+    const {image, name, polling, slogan, _id} = props.candidate;
     const lastName = name.substring(name.indexOf(' ')+1)
     const firstName = name.split(' ')[0]
 
     return (
-        <div style={styles.container}>
-            <div style={styles.imgContainer}>
-            {(image)?<img alt={name} style={styles.imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
+        <Link style={{textDecoration: 'none'}} key={_id} to={`/candidates/${_id}`}>
+            <div style={styles.container}>
+                <div style={styles.imgContainer}>
+                {(image)?<img alt={name} style={styles.imgStyle} src={process.env.PUBLIC_URL + `/headshots/${image}`} />:null}
+                </div>
+                <div style={styles.textContainer}>
+                    <p style={styles.percentageText}>
+                        <span>{(polling && polling > 0)?polling + '%':null}</span><br/>                    
+                    </p>
+                    <p>
+                        <span>{firstName}</span><br />
+                        <span style={styles.surnameStyle}>{lastName}</span><br />
+                    </p>
+                    <span style={{...styles.sloganText}}>{slogan}</span>
+                </div>
             </div>
-            <div style={styles.textContainer}>
-                <p style={styles.percentageText}>
-                    <span>{(polling && polling > 0)?polling + '%':null}</span><br/>                    
-                </p>
-                <p>
-                    <span>{firstName}</span><br />
-                    <span style={styles.surnameStyle}>{lastName}</span><br />
-                </p>
-                <span style={{...styles.sloganText}}>{slogan}</span>
-            </div>
-        </div>
+        </Link>
     )
 }
