@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom';
 
-import PolicyAddForm from '../../components/PolicyAddForm';
+import PolicyAddForm from './IssueAddForm';
 import PolicyDisplay from '../../components/PolicyDisplay';
 
 export default class IssueList extends Component {

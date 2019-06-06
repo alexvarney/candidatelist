@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class PolicyAddForm extends Component {
+export default class IssueAddForm extends Component {
 
     constructor(props){
         super(props);
