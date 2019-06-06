@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import {Route} from 'react-router-dom'
+import React, { Component } from 'react';
+import {Route} from 'react-router-dom';
 
-import PolicyAddForm from '../components/PolicyAddForm'
-import PolicyDisplay from '../components/PolicyDisplay'
+import PolicyAddForm from '../../components/PolicyAddForm';
+import PolicyDisplay from '../../components/PolicyDisplay';
 
-export default class PolicyView extends Component {
+export default class IssueList extends Component {
   constructor(props){
     super(props)
     this.state = {

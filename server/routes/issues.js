@@ -31,6 +31,17 @@ router.post('/', (req, res) =>{
 
 })
 
+router.put('/id/:id', (req, res)=>{
+    Issue.findByIdAndUpdate(req.params.id, req.body, (err, doc)=>{
+        if (err){
+            res.status(500).send(err);
+        }
+        else{
+            res.status(200).send(doc);
+        }
+    })
+})
+
 /* Delete an issue */
 router.delete('/id/:id', (req, res)=>{
     Issue.findByIdAndDelete(req.params.id).exec((error)=>{

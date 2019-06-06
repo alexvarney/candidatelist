@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CandidateListCard from '../components/CandidateListCard';
+import CandidateListCard from '../../components/CandidateListCard';
 
 export default class CandidateList extends Component {
     constructor(){

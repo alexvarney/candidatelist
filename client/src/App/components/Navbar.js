@@ -26,7 +26,7 @@ export default () => {
         <span style={titleStyle}>CandidateList</span>
         <Link style={linkStyle} to="/">Home</Link>
         <Link style={linkStyle} to="/candidates">Candidates</Link>
-        <Link style={linkStyle} to="/policies">Policies</Link>
+        <Link style={linkStyle} to="/issues">Issues</Link>
     </nav>
   )
 }

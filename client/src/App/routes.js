@@ -1,25 +1,18 @@
 import React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import Home from './views/Home';
-import Policies from './views/PolicyView';
+import CandidateRoutes from './views/candidates/routes';
+import IssueRoutes from './views/issues/routes';
 
-import CandidateList from './views/CandidateList';
-import CandidateAddForm from './views/CandidateAddForm';
-import SingleCandidateView from './views/SingleCandidateView';
 
 const Routes = () => {
     return(
         <div>
             <Switch>
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/">
-                    <Redirect to="/home" />
-                </Route>
-                <Route exact path='/candidates' component={CandidateList} />
-                <Route exact path='/candidates/add' component={CandidateAddForm} />
-                <Route path='/candidates/:id' component={SingleCandidateView} />
-                <Route path="/policies" component={Policies} />
+                <Route exact path="/" component={Home} />    
+                <Route path='/candidates' component={CandidateRoutes} />
+                <Route path="/issues" component={IssueRoutes} />
             </Switch>
         </div>
     )

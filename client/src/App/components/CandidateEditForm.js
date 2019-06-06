@@ -10,15 +10,28 @@ export default class CandidateEditForm extends Component {
         super(props);
 
         this.state = {
-            redirect: false,
+            formValues: {},
         }
     }
 
     handleFormChange = (event) => {
-        if(!this.state[event.target.name]){
-            this.setState({[event.target.name]:''});
+        event.persist();
+
+        if(!this.state.formValues[event.target.name]){
+            this.setState((prevState) => ({
+                formValues: {
+                    ...prevState.formValues,
+                    [event.target.name]: '',
+                }
+            }))
         }
-        this.setState({[event.target.name]: event.target.value});
+
+        this.setState((prevState) => ({
+            formValues: {
+                ...prevState.formValues,
+                [event.target.name]: event.target.value,
+            }
+        }))
     }
 
     handleSubmit = (event) => {
@@ -29,14 +42,11 @@ export default class CandidateEditForm extends Component {
         fetch(URL, {
             method: 'PUT', 
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(this.state),})
-        .then((data)=>this.props.onUpdate());
-    }
-
-    renderRedirect = () => {
-        if(this.state.redirect){
-            return <Redirect to="/candidates/"/>
-        }
+            body: JSON.stringify(this.state.formValues)
+        ,}).then((data)=>{
+            this.props.onUpdate()
+            
+        });
     }
 
     deleteCandidate = (event) => {
@@ -63,7 +73,7 @@ export default class CandidateEditForm extends Component {
         <div style={componentStyle}>
             <h3>Edit Candidate Data</h3>
             <form onSubmit={this.handleSubmit}>
-                {this.renderRedirect()}
+
                 <label style={labelStyle}>
                     Name:
                     <input name="name" onChange={this.handleFormChange} type="text" placeholder={`${this.props.candidate.name}`}></input>
